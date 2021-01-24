@@ -1,6 +1,6 @@
 import VueRouter from 'vue-router';
-import SecondComponent from "./components/SecondComponent";
-import BookablePage from "./Bookable/BookablePage";
+import Bookable from "./Bookable/Bookable";
+import BookablePage from "./Bookables/BookablePage";
 
 const routes = [
     {
@@ -9,9 +9,9 @@ const routes = [
         name: 'home',
     },
     {
-        path:'/second',
-        component: SecondComponent,
-        name:'second'
+        path:'/bookable/:id',
+        component: Bookable,
+        name:'bookable'
     }
 ]
 const router = new VueRouter({routes,   mode: 'history'})
