@@ -1,5 +1,5 @@
 <template>
-    <div class="mt-2">
+    <div style="padding: 1.25rem">
         <h6 class="text-uppercase text-secondary font-weight-bold">Availability</h6>
         <span class="text-success text-uppercase" v-if="hasAvailability">(Available)</span>
         <span class="text-danger text-uppercase" v-if="noAvailability">(No Available)</span>

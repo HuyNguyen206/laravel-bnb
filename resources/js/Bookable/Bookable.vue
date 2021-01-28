@@ -9,6 +9,12 @@
                     <p class="card-text">{{bookable.description}}</p>
                 </div>
             </div>
+            <div class="review mt-2 d-none d-md-block" style="padding: 1.25rem">
+                <h6 class="text-uppercase text-secondary font-weight-bolder">
+                    Review List
+                </h6>
+                <review-list v-for="n in 3" :key="n"></review-list>
+            </div>
         </div>
         <div class="col-md-4">
             <availability></availability>
@@ -16,14 +22,16 @@
 
     </div>
     <div v-else> Loading...</div>
+
 </div>
 </template>
 
 <script>
     import Availability from "./Availability";
+    import ReviewList from "./ReviewList";
     export default {
         name: "Bookable",
-        components: {Availability},
+        components: {ReviewList, Availability},
         data(){
             return{
                 bookable:null,

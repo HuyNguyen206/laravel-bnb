@@ -25,4 +25,9 @@ class Booking extends Model
 //                    ->where('from', '<=', $to);
 //            });
     }
+
+    function review()
+    {
+        return $this->hasOne(Review::class, 'booking_id');
+    }
 }
