@@ -6,18 +6,18 @@
                 </div>
                 <div class="col-md-6">
                     <span class="float-right">
-                      Rating
+                      {{review.rating}}
                    </span>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    5 minutes ago
+                    {{ review.created_at | momentAgo }}
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-12">
-                    Content of rating
+                    {{review.content}}
                 </div>
             </div>
 
@@ -26,8 +26,10 @@
 </template>
 
 <script>
+
 export default {
-name: "ReviewList"
+    name: "ReviewList",
+    props: ['review'],
 }
 </script>
 

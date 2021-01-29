@@ -18,9 +18,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::namespace('Api')->group(function(){
+    Route::apiResource('bookables', 'BookableController');
+    Route::get('bookables/{bookable}/availability', 'BookableAvailabilityController')->name('bookables.available');
+    Route::get('bookables/{bookable}/review', 'BookableReviewController')->name('bookables.reviews.index');
+});
 
-Route::apiResource('bookables', 'Api\BookableController');
-Route::get('bookables/{bookable}/availability', 'Api\BookableAvailabilityController');
 //Route::get('bookables', function (){
 //    return Bookable::all();
 //});

@@ -3,11 +3,16 @@
   <component name="ChangeListManager">
     <list default="true" id="3fccba59-decc-429c-80f3-5708ee6b6d3a" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Bookable.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Bookable.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Booking.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Booking.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/css/app.css" beforeDir="false" afterPath="$PROJECT_DIR$/public/css/app.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/js/app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/resources/js/Bookable/Availability.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Bookable/Availability.vue" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/resources/js/Bookable/Bookable.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Bookable/Bookable.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/Bookable/ReviewList.vue" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/Bookable/ReviewList.vue" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/js/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/resources/js/app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/welcome.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/welcome.blade.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/routes/api.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/webpack.mix.js" beforeDir="false" afterPath="$PROJECT_DIR$/webpack.mix.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,7 +198,9 @@
       <workItem from="1611715793379" duration="606000" />
       <workItem from="1611730295535" duration="604000" />
       <workItem from="1611740887085" duration="7175000" />
-      <workItem from="1611803005353" duration="13672000" />
+      <workItem from="1611803005353" duration="15191000" />
+      <workItem from="1611888816379" duration="2170000" />
+      <workItem from="1611905015863" duration="12175000" />
     </task>
     <servers />
   </component>

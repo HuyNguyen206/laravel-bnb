@@ -4,6 +4,8 @@
  * building robust, powerful web applications using Vue and Laravel.
  */
 
+import moment from "moment";
+
 require('./bootstrap');
 import VueRouter from 'vue-router';
 import router from "./router";
@@ -29,7 +31,9 @@ Vue.use(VueRouter)
  * the page. Then, you may begin adding components to this application
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
-
+Vue.filter('momentAgo', (date) => {
+    return moment(date).fromNow()
+})
 const app = new Vue({
     el: '#app',
     router,
