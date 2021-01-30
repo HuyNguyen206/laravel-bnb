@@ -6,7 +6,7 @@
                 </div>
                 <div class="col-md-6">
                     <span class="float-right">
-                      {{review.rating}}
+                        <star-rating :value="review.rating" class="fa-lg"></star-rating>
                    </span>
                 </div>
             </div>
