@@ -14,7 +14,7 @@ class ReviewTableSeeder extends Seeder
         //
         $bookables = \App\Bookable::all();
         $bookables->each(function($b){
-            $b->reviews()->saveMany(factory(\App\Review::class, random_int(2, 5))->make());
+            $b->reviews()->saveMany(factory(\App\Review::class, random_int(2, 3))->make());
         });
         $bookingIds = \App\Booking::all()->pluck('id');
         foreach (\App\Review::all() as $r)
@@ -26,6 +26,5 @@ class ReviewTableSeeder extends Seeder
             $r->booking_id = $bookingId;
             $r->save();
         }
-
     }
 }

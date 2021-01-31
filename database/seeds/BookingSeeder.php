@@ -16,7 +16,7 @@ class BookingSeeder extends Seeder
         //
         $bookables = Bookable::all();
         $bookables->each(function ($bookable){
-            $randomBooking = random_int(2, 5);
+            $randomBooking = random_int(3, 5);
             for($i = 0; $i < $randomBooking; $i++)
             {
                 $bookDraft = factory(Booking::class)->make();

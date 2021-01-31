@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 
 class Booking extends Model
@@ -30,4 +31,16 @@ class Booking extends Model
     {
         return $this->hasOne(Review::class, 'booking_id');
     }
+
+   protected static function booted()
+   {
+       static::creating(function($booking){
+        $booking->review_key = Str::uuid();
+       });
+   }
+
+   public static function getBookingByReviewKey($reviewKey)
+   {
+       return static::where('review_key', $reviewKey)->with('bookable')->first();
+   }
 }
