@@ -9,6 +9,7 @@ class Review extends Model
     //
     public $incrementing = false;
     protected $keyType = 'string';
+    protected $fillable = ['id', 'rating', 'content'];
 
     public function getIncrementing()
     {
