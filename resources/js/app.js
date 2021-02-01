@@ -32,14 +32,13 @@ Vue.use(VueRouter)
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 import StarRating from "./shared/components/StarRating";
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faUserSecret } from '@fortawesome/free-solid-svg-icons'
+import FatalError from "./shared/components/FatalError";
 
 Vue.filter('momentAgo', (date) => {
     return moment(date).fromNow()
 })
 Vue.component('star-rating', StarRating)
+Vue.component('fatal-error', FatalError)
 const app = new Vue({
     el: '#app',
     router,

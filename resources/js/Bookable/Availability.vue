@@ -34,6 +34,7 @@
 </template>
 
 <script>
+    import {is422} from './../shared/utils/response';
     export default {
         name: "Availability",
         data(){
@@ -57,7 +58,7 @@
                 .catch(err => {
                     console.log(err.response)
                     this.status = err.response.status
-                    if(err.response.status == 422)
+                    if(is422(err))
                     {
                         this.errors = err.response.data.errors
                     }
