@@ -33,15 +33,24 @@ Vue.use(VueRouter)
  */
 import StarRating from "./shared/components/StarRating";
 import FatalError from "./shared/components/FatalError";
-
+import ErrorShow from "./shared/components/ErrorShow";
+import Success from "./shared/components/Success";
+import Vuex from 'vuex'
+import storeDefinition from "./store";
+Vue.use(Vuex)
 Vue.filter('momentAgo', (date) => {
     return moment(date).fromNow()
 })
 Vue.component('star-rating', StarRating)
 Vue.component('fatal-error', FatalError)
+Vue.component('error-show', ErrorShow)
+Vue.component('success', Success)
+
+const store = new Vuex.Store(storeDefinition)
 const app = new Vue({
     el: '#app',
     router,
+    store,
     components:{
         index
     }

@@ -7,24 +7,16 @@
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="from" class="mb-0">From</label>
-                    <input @keyup.enter="check" v-model="from" :class="{'is-invalid':errorFor('from')}" type="text" name="from" class="form-control form-control-sm" placeholder="From date" id="from">
+                    <input @keyup.enter="check" v-model="from" :class="{'is-invalid':errorFor(errors,'from')}" type="text" name="from" class="form-control form-control-sm" placeholder="From date" id="from">
                 </div>
-                <div class="invalid-feedback" v-if="this.hasErrors">
-                    <p v-for="(error, index) in errorFor('from')" :key="'from'+index">
-                        {{error}}
-                    </p>
-                </div>
+                <error-show :list-error="errors" field="from"></error-show>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="to" class="mb-0">To</label>
-                    <input  @keyup.enter="check" v-model="to" :class="{'is-invalid':errorFor('to')}"  type="text" name="to" class="form-control form-control-sm" placeholder="To date" id="to">
+                    <input  @keyup.enter="check" v-model="to" :class="{'is-invalid':errorFor(errors,'to')}"  type="text" name="to" class="form-control form-control-sm" placeholder="To date" id="to">
                 </div>
-                <div class="invalid-feedback" v-if="this.hasErrors">
-                    <p v-for="(error, index) in errorFor('to')" :key="'to'+index">
-                        {{error}}
-                    </p>
-                </div>
+                <error-show :list-error="errors" field="to"></error-show>
             </div>
 
         </div>
@@ -35,15 +27,15 @@
 
 <script>
     import {is422} from './../shared/utils/response';
+    import error from "../shared/mixins/error";
     export default {
         name: "Availability",
+        mixins:[error],
         data(){
             return{
-                loading: false,
                 from: null,
                 to:null,
                 status:null,
-                errors:null
             }
         },
         methods:{
@@ -66,9 +58,6 @@
                 .then(() => {
                     this.loading = false
                 })
-            },
-            errorFor(field){
-                return this.hasErrors && this.errors[field] ? this.errors[field] : null
             }
         },
         computed:{

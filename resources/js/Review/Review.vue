@@ -4,9 +4,13 @@
             <div class="col-md-12 mt-5">
                 <fatal-error></fatal-error>
             </div>
-
         </div>
-        <div class="row" v-else>
+        <div v-if="success">
+            <success>
+                You've left a review, thank you very much!
+            </success>
+        </div>
+        <div class="row" v-if="!error && !success">
                 <div
                     :class="firstColumn"
                 >
@@ -47,13 +51,13 @@
                                         rows="10"
                                         class="form-control"
                                         v-model="review.content"
-                                        :class="{'is-invalid':this.errors.content}"
+                                        :class="{'is-invalid':errorFor(errors, 'content')}"
                                     ></textarea>
+                                    <error-show :list-error="errors" field="content"></error-show>
                                 </div>
-                                <div v-if="this.errors.content" class="invalid-feedback d-block mb-4">
-                                    {{this.errors.content[0]}}
-                                </div>
-                                <button type="submit" class="btn btn-lg btn-primary btn-block">Submit</button>
+
+
+                                <button type="submit" class="btn btn-lg btn-primary btn-block" :disabled="sending">Submit</button>
                             </form>
 
                         </div>
@@ -66,7 +70,9 @@
 
 <script>
 import {is404, is422} from "../shared/utils/response";
+import error from "../shared/mixins/error";
 export default {
+    mixins: [error],
     data() {
         return {
             reviewIdInUrl:this.$route.params.id,
@@ -78,7 +84,6 @@ export default {
             existingReview: {
                 created_at:null
             },
-            loading: false,
             booking: {
                 id:null,
                 from:null,
@@ -88,38 +93,40 @@ export default {
                 }
             },
             error:false,
-            errors:[]
+            sending:false,
+            success:false,
         };
     },
-    created() {
+    async created() {
         this.loading = true;
         // 1. If review already exists (in reviews table by id)
-        axios
-            .get(`/api/reviews/${this.reviewIdInUrl}`)
-            .then(response => {
-                this.existingReview = response.data.data;
-            })
-            .catch(err => {
-                if (is404(err)) {
-                    // 2. Fetch a booking by a review key
-                    return axios
-                        .get(`/api/booking-by-review/${this.reviewIdInUrl}`)
-                        .then(response => {
-                            this.booking = response.data.data;
-                            this.review.id = this.$route.params.id
-                        })
-                        .catch(err => {
-                            if(!is404(err))
-                            {
-                                this.error = true
-                            }
-                        });
-                }
-                this.error = true
-            })
-            .then(() => {
-                this.loading = false;
-            });
+        try {
+            this.existingReview = (await axios.get(`/api/reviews/${this.reviewIdInUrl}`)).data.data
+        }
+       catch(err)
+       {
+           console.log('log err', err)
+           if (is404(err)) {
+               console.log('404')
+               // 2. Fetch a booking by a review key
+               try {
+                   this.booking= (await axios.get(`/api/booking-by-review/${this.reviewIdInUrl}`)).data.data
+                   this.review.id = this.$route.params.id
+               }
+               catch (err)
+               {
+                   if(!is404(err))
+                   {
+                       this.error = true
+                   }
+               }
+           }
+           else
+           {
+               this.error = true
+           }
+       }
+        this.loading = false;
         // 3. Store the review
     },
     computed: {
@@ -143,10 +150,15 @@ export default {
     },
     methods:{
         submitReview(){
+            this.sending =true
+            this.success = false
             axios.post(`/api/reviews`, this.review)
             .then(res => {
-                alert('You have add review success!');
-                this.$router.push({name: 'bookable', params:{id:this.booking.bookable.bookable_id}})
+                if(res.status == 201)
+                {
+                    this.success = true
+                }
+                // this.$router.push({name: 'bookable', params:{id:this.booking.bookable.bookable_id}})
             })
             .catch(err => {
                 if(is422(err))
@@ -159,7 +171,10 @@ export default {
                     }
                 }
                 this.error = true
-                console.log(err.response.statusText)
+
+            })
+            .then(() => {
+                this.sending =false
             })
         }
     }
