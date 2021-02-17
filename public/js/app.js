@@ -1920,8 +1920,17 @@ module.exports = {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _shared_utils_response__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../shared/utils/response */ "./resources/js/shared/utils/response.js");
-/* harmony import */ var _shared_mixins_error__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../shared/mixins/error */ "./resources/js/shared/mixins/error.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _shared_utils_response__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./../shared/utils/response */ "./resources/js/shared/utils/response.js");
+/* harmony import */ var _shared_mixins_error__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../shared/mixins/error */ "./resources/js/shared/mixins/error.js");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
 //
 //
 //
@@ -1949,37 +1958,81 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Availability",
-  mixins: [_shared_mixins_error__WEBPACK_IMPORTED_MODULE_1__["default"]],
+  mixins: [_shared_mixins_error__WEBPACK_IMPORTED_MODULE_2__["default"]],
   data: function data() {
     return {
-      from: null,
-      to: null,
+      from: this.$store.state.lastSearch.from,
+      to: this.$store.state.lastSearch.to,
       status: null
     };
   },
   methods: {
+    // ...mapActions([
+    //     'setLastSearch', // map `this.increment()` to `this.$store.dispatch('increment')`
+    // ]),
     check: function check() {
       var _this = this;
 
-      this.loading = true;
-      axios.get("/api/bookables/".concat(this.$route.params.id, "/availability/?from=").concat(this.from, "&to=").concat(this.to)).then(function (response) {
-        console.log(response);
-        _this.errors = null;
-        _this.status = response.status;
-      })["catch"](function (err) {
-        console.log(err.response);
-        _this.status = err.response.status;
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                console.log(_this.$store);
 
-        if (Object(_shared_utils_response__WEBPACK_IMPORTED_MODULE_0__["is422"])(err)) {
-          _this.errors = err.response.data.errors;
-        }
-      }).then(function () {
-        _this.loading = false;
-      });
+                _this.$store.dispatch("setLastSearch", {
+                  from: _this.from,
+                  to: _this.to
+                });
+
+                _this.loading = true;
+                _context.prev = 3;
+                _context.next = 6;
+                return axios.get("/api/bookables/".concat(_this.$route.params.id, "/availability/?from=").concat(_this.from, "&to=").concat(_this.to));
+
+              case 6:
+                _this.status = _context.sent.status;
+                _context.next = 13;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](3);
+                _this.status = _context.t0.response.status;
+
+                if (Object(_shared_utils_response__WEBPACK_IMPORTED_MODULE_1__["is422"])(_context.t0)) {
+                  _this.errors = _context.t0.response.data.errors;
+                } else _this.errors = [];
+
+              case 13:
+                _this.$emit('availability', {
+                  hasAvailability: _this.hasAvailability,
+                  from: _this.from,
+                  to: _this.to
+                });
+
+                _this.loading = false;
+
+              case 15:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[3, 9]]);
+      }))();
     }
   },
   computed: {
@@ -2006,8 +2059,24 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _Availability__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Availability */ "./resources/js/Bookable/Availability.vue");
-/* harmony import */ var _ReviewList__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ReviewList */ "./resources/js/Bookable/ReviewList.vue");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Availability__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Availability */ "./resources/js/Bookable/Availability.vue");
+/* harmony import */ var _ReviewList__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ReviewList */ "./resources/js/Bookable/ReviewList.vue");
+/* harmony import */ var _Breakdown__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Breakdown */ "./resources/js/Bookable/Breakdown.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2042,36 +2111,172 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Bookable",
   components: {
-    ReviewList: _ReviewList__WEBPACK_IMPORTED_MODULE_1__["default"],
-    Availability: _Availability__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ReviewList: _ReviewList__WEBPACK_IMPORTED_MODULE_2__["default"],
+    Availability: _Availability__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Breakdown: _Breakdown__WEBPACK_IMPORTED_MODULE_3__["default"]
   },
+  computed: _objectSpread(_objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapState"])({
+    lastSearch: 'lastSearch'
+  })), Object(vuex__WEBPACK_IMPORTED_MODULE_4__["mapGetters"])({
+    basket: 'basket'
+  })), {}, {
+    inBasketAlready: function inBasketAlready() {
+      var _this = this;
+
+      return this.basket.items.some(function (item) {
+        return item.bookable.id == _this.id;
+      });
+    }
+  }),
   data: function data() {
     return {
       bookable: null,
       id: this.$route.params.id,
-      listReview: null
+      listReview: null,
+      priceBooking: {}
     };
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     axios.get("/api/bookables/".concat(this.id)).then(function (_ref) {
       var data = _ref.data;
-      return _this.bookable = data.data;
+      return _this2.bookable = data.data;
     })["catch"](function (err) {
       console.log(err.response);
     });
     axios.get("/api/bookables/".concat(this.$route.params.id, "/review")).then(function (_ref2) {
       var data = _ref2.data;
-      _this.listReview = data.data;
+      _this2.listReview = data.data;
     })["catch"](function (err) {
       console.log(err.response);
     });
+  },
+  methods: {
+    checkPrice: function checkPrice(data) {
+      var _this3 = this;
+
+      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
+        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
+          while (1) {
+            switch (_context.prev = _context.next) {
+              case 0:
+                if (data.hasAvailability) {
+                  _context.next = 3;
+                  break;
+                }
+
+                _this3.priceBooking = {};
+                return _context.abrupt("return");
+
+              case 3:
+                _context.prev = 3;
+                _context.next = 6;
+                return axios.get("/api/bookables/".concat(_this3.id, "/price?from=").concat(_this3.lastSearch.from, "&to=").concat(_this3.lastSearch.to));
+
+              case 6:
+                _this3.priceBooking = _context.sent.data.data;
+                _context.next = 11;
+                break;
+
+              case 9:
+                _context.prev = 9;
+                _context.t0 = _context["catch"](3);
+
+              case 11:
+              case "end":
+                return _context.stop();
+            }
+          }
+        }, _callee, null, [[3, 9]]);
+      }))();
+    },
+    addToBasket: function addToBasket() {
+      var basket = {
+        bookable: this.bookable,
+        priceBooking: this.priceBooking,
+        lastSearch: this.lastSearch
+      };
+
+      if (!this.inBasketAlready) {
+        this.inBasket = false;
+        this.$store.commit('addToBasket', basket);
+      }
+    },
+    removeFromBasket: function removeFromBasket(id) {
+      this.$store.commit('removeFromBasket', id);
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/Breakdown.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Bookable/Breakdown.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Breakdown",
+  props: ['priceBooking'],
+  methods: {
+    pluralDay: function pluralDay(days) {
+      return days > 1 ? "".concat(days, " days") : "".concat(days, " day");
+    }
   }
 });
 
@@ -2474,6 +2679,13 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -2487,8 +2699,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "index"
+  name: "index",
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapState"])({
+    lastSearchComputed: 'lastSearch'
+  })), Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    itemsInBasket: 'itemsInBasket'
+  }))
 });
 
 /***/ }),
@@ -7068,6 +7289,25 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 // module
 exports.push([module.i, "\n.invalid-feedback[data-v-98601dce]{\n    display: inline-block;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Bookable/Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nul.list-cost li[data-v-79774353] {\n    border-bottom: 1px solid #80808052;\n    padding: 10px 0;\n}\n", ""]);
 
 // exports
 
@@ -60593,6 +60833,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Bookable/Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/lib/addStyles.js":
 /*!****************************************************!*\
   !*** ./node_modules/style-loader/lib/addStyles.js ***!
@@ -61196,20 +61466,24 @@ var render = function() {
     _c(
       "h6",
       { staticClass: "text-uppercase text-secondary font-weight-bold" },
-      [_vm._v("Availability")]
+      [
+        _vm._v("Check availability\n        "),
+        _c("transition", { attrs: { name: "fade" } }, [
+          _vm.hasAvailability
+            ? _c("span", { staticClass: "text-success text-uppercase" }, [
+                _vm._v("(Available)")
+              ])
+            : _vm._e(),
+          _vm._v(" "),
+          _vm.noAvailability
+            ? _c("span", { staticClass: "text-danger text-uppercase" }, [
+                _vm._v("(No Available)")
+              ])
+            : _vm._e()
+        ])
+      ],
+      1
     ),
-    _vm._v(" "),
-    _vm.hasAvailability
-      ? _c("span", { staticClass: "text-success text-uppercase" }, [
-          _vm._v("(Available)")
-        ])
-      : _vm._e(),
-    _vm._v(" "),
-    _vm.noAvailability
-      ? _c("span", { staticClass: "text-danger text-uppercase" }, [
-          _vm._v("(No Available)")
-        ])
-      : _vm._e(),
     _vm._v(" "),
     _c("div", { staticClass: "form-row" }, [
       _c(
@@ -61326,7 +61600,13 @@ var render = function() {
         attrs: { disabled: _vm.loading },
         on: { click: _vm.check }
       },
-      [_vm._v("Check")]
+      [
+        _vm.loading
+          ? _c("i", { staticClass: "fas fa-spinner fa-spin" }, [
+              _vm._v("Checking...")
+            ])
+          : _c("span", [_vm._v("Check")])
+      ]
     )
   ])
 }
@@ -61408,9 +61688,151 @@ var render = function() {
             )
           ]),
           _vm._v(" "),
-          _c("div", { staticClass: "col-md-4" }, [_c("availability")], 1)
+          _c(
+            "div",
+            { staticClass: "col-md-4" },
+            [
+              _c("availability", {
+                on: {
+                  availability: function($event) {
+                    return _vm.checkPrice($event)
+                  }
+                }
+              }),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticStyle: { padding: "0 1.25rem" } },
+                [
+                  _c(
+                    "transition",
+                    { attrs: { name: "fade" } },
+                    [
+                      _vm.priceBooking.price
+                        ? _c("breakdown", {
+                            attrs: { priceBooking: _vm.priceBooking }
+                          })
+                        : _vm._e()
+                    ],
+                    1
+                  ),
+                  _vm._v(" "),
+                  _c("transition", { attrs: { name: "fade" } }, [
+                    _vm.priceBooking.price
+                      ? _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-primary btn-block",
+                            attrs: { disabled: _vm.inBasketAlready },
+                            on: {
+                              click: function($event) {
+                                return _vm.addToBasket()
+                              }
+                            }
+                          },
+                          [_vm._v("Book now")]
+                        )
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _vm.inBasketAlready
+                    ? _c(
+                        "button",
+                        {
+                          staticClass: "btn btn-danger btn-block",
+                          attrs: { disabled: !_vm.inBasketAlready },
+                          on: {
+                            click: function($event) {
+                              return _vm.removeFromBasket(_vm.id)
+                            }
+                          }
+                        },
+                        [_vm._v("Remove from basket")]
+                      )
+                    : _vm._e(),
+                  _vm._v(" "),
+                  _c("transition", { attrs: { name: "fade" } }, [
+                    _vm.inBasketAlready
+                      ? _c("div", { staticClass: "text-muted warning mt-2" }, [
+                          _vm._v(
+                            "\n                            This booking already in the basket!\n                        "
+                          )
+                        ])
+                      : _vm._e()
+                  ])
+                ],
+                1
+              )
+            ],
+            1
+          )
         ])
       : _c("div", [_vm._v(" Loading...")])
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/Breakdown.vue?vue&type=template&id=79774353&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/Bookable/Breakdown.vue?vue&type=template&id=79774353&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _c("h6", { staticClass: "text-uppercase text-muted" }, [
+      _vm._v("\n        price breakdown\n    ")
+    ]),
+    _vm._v(" "),
+    _c(
+      "ul",
+      { staticClass: "list-cost pl-0" },
+      _vm._l(_vm.priceBooking.breakdown, function(days, price) {
+        return _c(
+          "li",
+          { key: price, staticClass: "d-flex justify-content-between" },
+          [
+            _c("span", [
+              _vm._v(
+                "\n           " +
+                  _vm._s(_vm.pluralDay(days)) +
+                  " x $" +
+                  _vm._s(price) +
+                  "\n        "
+              )
+            ]),
+            _vm._v(" "),
+            _c("span", [
+              _vm._v("\n            $" + _vm._s(price * days) + "\n        ")
+            ])
+          ]
+        )
+      }),
+      0
+    ),
+    _vm._v(" "),
+    _c("section", { staticClass: "d-flex justify-content-between mb-2" }, [
+      _c("span", { staticClass: "font-weight-bolder" }, [
+        _vm._v("\n    Total\n    ")
+      ]),
+      _vm._v(" "),
+      _c("span", [
+        _vm._v("\n         $" + _vm._s(_vm.priceBooking.price) + "\n    ")
+      ])
+    ])
   ])
 }
 var staticRenderFns = []
@@ -61839,7 +62261,18 @@ var render = function() {
         _vm._v(" "),
         _c("router-link", { attrs: { to: { name: "bookable" } } }, [
           _vm._v("Bookable")
-        ])
+        ]),
+        _vm._v(" "),
+        _c(
+          "router-link",
+          { staticClass: "btn btn-primary", attrs: { to: { name: "home" } } },
+          [
+            _vm._v("\n            Basket "),
+            _c("span", { staticClass: "badge badge-light" }, [
+              _vm._v(_vm._s(_vm.itemsInBasket))
+            ])
+          ]
+        )
       ],
       1
     ),
@@ -78750,6 +79183,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/Bookable/Breakdown.vue":
+/*!*********************************************!*\
+  !*** ./resources/js/Bookable/Breakdown.vue ***!
+  \*********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Breakdown_vue_vue_type_template_id_79774353_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./Breakdown.vue?vue&type=template&id=79774353&scoped=true& */ "./resources/js/Bookable/Breakdown.vue?vue&type=template&id=79774353&scoped=true&");
+/* harmony import */ var _Breakdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Breakdown.vue?vue&type=script&lang=js& */ "./resources/js/Bookable/Breakdown.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _Breakdown_vue_vue_type_style_index_0_id_79774353_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css& */ "./resources/js/Bookable/Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _Breakdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _Breakdown_vue_vue_type_template_id_79774353_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _Breakdown_vue_vue_type_template_id_79774353_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "79774353",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/Bookable/Breakdown.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/Bookable/Breakdown.vue?vue&type=script&lang=js&":
+/*!**********************************************************************!*\
+  !*** ./resources/js/Bookable/Breakdown.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Breakdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/babel-loader/lib??ref--4-0!../../../node_modules/vue-loader/lib??vue-loader-options!./Breakdown.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/Breakdown.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_Breakdown_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/Bookable/Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css&":
+/*!******************************************************************************************************!*\
+  !*** ./resources/js/Bookable/Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css& ***!
+  \******************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Breakdown_vue_vue_type_style_index_0_id_79774353_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/style-loader!../../../node_modules/css-loader??ref--6-1!../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../node_modules/postcss-loader/src??ref--6-2!../../../node_modules/vue-loader/lib??vue-loader-options!./Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/Breakdown.vue?vue&type=style&index=0&id=79774353&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Breakdown_vue_vue_type_style_index_0_id_79774353_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Breakdown_vue_vue_type_style_index_0_id_79774353_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Breakdown_vue_vue_type_style_index_0_id_79774353_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(["default"].indexOf(__WEBPACK_IMPORT_KEY__) < 0) (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_Breakdown_vue_vue_type_style_index_0_id_79774353_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+
+
+/***/ }),
+
+/***/ "./resources/js/Bookable/Breakdown.vue?vue&type=template&id=79774353&scoped=true&":
+/*!****************************************************************************************!*\
+  !*** ./resources/js/Bookable/Breakdown.vue?vue&type=template&id=79774353&scoped=true& ***!
+  \****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Breakdown_vue_vue_type_template_id_79774353_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../node_modules/vue-loader/lib??vue-loader-options!./Breakdown.vue?vue&type=template&id=79774353&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/Bookable/Breakdown.vue?vue&type=template&id=79774353&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Breakdown_vue_vue_type_template_id_79774353_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_Breakdown_vue_vue_type_template_id_79774353_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/Bookable/ReviewList.vue":
 /*!**********************************************!*\
   !*** ./resources/js/Bookable/ReviewList.vue ***!
@@ -79097,6 +79617,9 @@ var app = new Vue({
   store: store,
   components: {
     index: _index__WEBPACK_IMPORTED_MODULE_3__["default"]
+  },
+  beforeCreate: function beforeCreate() {
+    this.$store.dispatch('loadStoredSearch');
   }
 });
 
@@ -79593,10 +80116,45 @@ __webpack_require__.r(__webpack_exports__);
     lastSearch: {
       from: null,
       to: null
+    },
+    basket: {
+      items: []
     }
   },
   mutations: {
-    setLastSearch: function setLastSearch(state, payload) {}
+    setLastSearch: function setLastSearch(state, payload) {
+      state.lastSearch = payload;
+    },
+    addToBasket: function addToBasket(state, payload) {
+      state.basket.items.push(payload);
+    },
+    removeFromBasket: function removeFromBasket(state, id) {
+      state.basket.items = state.basket.items.filter(function (item) {
+        return item.bookable.id != id;
+      });
+    }
+  },
+  actions: {
+    setLastSearch: function setLastSearch(context, payload) {
+      context.commit('setLastSearch', payload);
+      localStorage.setItem('lastSearch', JSON.stringify(payload));
+    },
+    loadStoredSearch: function loadStoredSearch(_ref) {
+      var commit = _ref.commit;
+      var lastSearch = localStorage.getItem('lastSearch');
+
+      if (lastSearch) {
+        commit('setLastSearch', JSON.parse(lastSearch));
+      }
+    }
+  },
+  getters: {
+    itemsInBasket: function itemsInBasket(state) {
+      return state.basket.items.length;
+    },
+    basket: function basket(state) {
+      return state.basket;
+    }
   }
 });
 

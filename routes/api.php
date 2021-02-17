@@ -24,6 +24,7 @@ Route::namespace('Api')->group(function(){
     Route::get('bookables/{bookable}/review', 'BookableReviewController')->name('bookables.reviews.index');
     Route::apiResource('reviews', 'ReviewController')->only(['show', 'store']);
     Route::get('booking-by-review/{reviewKey}', 'BookingByReviewController');
+    Route::get('bookables/{bookables}/price', 'BookablePriceController')->name('bookable.price.show');
 });
 
 //Route::get('bookables', function (){

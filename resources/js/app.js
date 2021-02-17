@@ -53,5 +53,8 @@ const app = new Vue({
     store,
     components:{
         index
+    },
+    beforeCreate() {
+        this.$store.dispatch('loadStoredSearch')
     }
 });
