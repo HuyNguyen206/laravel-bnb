@@ -12,6 +12,9 @@ export default {
         setLastSearch(state, payload) {
             state.lastSearch = payload
         },
+        setBasket(state, payload) {
+            state.basket.items = payload
+        },
         addToBasket(state, payload){
             state.basket.items.push(payload)
         },
@@ -20,6 +23,7 @@ export default {
             state.basket.items =  state.basket.items.filter((item) => {
                 return item.bookable.id != id
             })
+            localStorage.setItem('basket',  JSON.stringify(state.basket.items))
         }
     },
     actions:{
@@ -35,6 +39,16 @@ export default {
             {
                 commit('setLastSearch',JSON.parse(lastSearch))
             }
+            let basket = localStorage.getItem('basket');
+            if(basket)
+            {
+                commit('setBasket',JSON.parse(basket))
+            }
+        },
+        addToBasket({commit, state}, payload)
+        {
+            commit('addToBasket', payload);
+            localStorage.setItem('basket', JSON.stringify(state.basket.items))
         }
     },
     getters:{

@@ -3,7 +3,7 @@
         <nav class="navbar navbar-light bg-light p-2 mb-2">
             <router-link :to="{name:'home'}">Home</router-link>
             <router-link :to="{name: 'bookable'}">Bookable</router-link>
-            <router-link :to="{name : 'home'}" class="btn btn-primary">
+            <router-link :to="{name : 'basket'}" class="btn btn-primary">
                 Basket <span class="badge badge-light">{{itemsInBasket}}</span>
             </router-link>
         </nav>

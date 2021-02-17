@@ -117,7 +117,8 @@
                 }
                 if(!this.inBasketAlready){
                     this.inBasket = false
-                    this.$store.commit('addToBasket', basket)
+                    this.$store.dispatch('addToBasket', basket)
+                    // this.$store.commit('addToBasket', basket)
                 }
             },
             removeFromBasket(id)
