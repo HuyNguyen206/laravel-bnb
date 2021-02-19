@@ -25,6 +25,7 @@ Route::namespace('Api')->group(function(){
     Route::apiResource('reviews', 'ReviewController')->only(['show', 'store']);
     Route::get('booking-by-review/{reviewKey}', 'BookingByReviewController');
     Route::get('bookables/{bookables}/price', 'BookablePriceController')->name('bookable.price.show');
+    Route::post('checkout', 'CheckoutController')->name('checkout');
 });
 
 //Route::get('bookables', function (){

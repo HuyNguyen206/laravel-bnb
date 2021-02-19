@@ -21,4 +21,5 @@ class Bookable extends Model
     {
         return $this->hasMany(Review::class, 'bookable_id');
     }
+    
 }

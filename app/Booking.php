@@ -10,6 +10,7 @@ use Illuminate\Support\Str;
 class Booking extends Model
 {
     //
+    protected $guarded = ['id'];
     function bookable()
     {
         return $this->belongsTo(Bookable::class, 'bookables_id');
@@ -25,6 +26,11 @@ class Booking extends Model
 //                $q->where('from', '>=', $from)
 //                    ->where('from', '<=', $to);
 //            });
+    }
+
+    function address()
+    {
+        return $this->belongsTo(Address::class, 'address_id');
     }
 
     function review()
