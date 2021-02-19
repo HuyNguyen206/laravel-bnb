@@ -32,10 +32,13 @@ class CheckoutController extends Controller
         $bookings = $finalData['bookings'];
         $bookingsCollection = collect($bookings);
         $dataReturn = $bookingsCollection->map(function ($booking) use ($address) {
+            $bookable = Bookable::findOrFail($booking['bookables_id']);
+            $totalPrice = $bookable->priceFor($booking['from'], $booking['to'])['price'];
+            $booking['price'] = $totalPrice;
             $newBooking = Booking::create($booking);
             $newBooking->address()->associate(Address::create($address));
             $newBooking->save();
-            return $newBooking;
+            return $newBooking->load('bookable');
         });
         return $dataReturn;
     }

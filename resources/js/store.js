@@ -14,6 +14,7 @@ export default {
         },
         setBasket(state, payload) {
             state.basket.items = payload
+            localStorage.setItem('basket',  JSON.stringify(payload))
         },
         addToBasket(state, payload){
             state.basket.items.push(payload)

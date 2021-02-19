@@ -23,17 +23,8 @@ class BookablePriceController extends Controller
             'to' => 'required|date_format:Y-m-d|after_or_equal:from'
         ]);
         $bookable = Bookable::findOrFail($id);
-        $from = Carbon::parse($data['from']);
-        $to = Carbon::parse($data['to']);
-        $diffInDays = $from->diffInDays($to) + 1;
-        $totalPrice = $diffInDays * $bookable->price;
         return response()->json([
-            'data' => [
-                'price' => $totalPrice,
-                'breakdown' => [
-                    $bookable->price => $diffInDays
-                ]
-            ]
+            'data' => $bookable->priceFor($data['from'], $data['to'])
         ]);
     }
 }
