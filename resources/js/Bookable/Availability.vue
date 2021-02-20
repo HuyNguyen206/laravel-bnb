@@ -26,7 +26,7 @@
             </div>
 
             <button class="btn btn-secondary btn-block" @click="check" :disabled="loading">
-                <i class="fas fa-spinner fa-spin" v-if="loading">Checking...</i>
+                 <span v-if="loading"><i class="fas fa-spinner fa-spin"></i> Checking...</span>
                 <span v-else>Check</span>
             </button>
 
