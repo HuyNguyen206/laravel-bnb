@@ -1,5 +1,6 @@
 <?php
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -12,7 +13,10 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+Route::middleware('auth')->get('/user', function (Request $request) {
+    return $request->user();
+});
+Auth::routes();
 Route::get('test', function(){
     // Test database connection
     try {
@@ -24,3 +28,7 @@ Route::get('test', function(){
 Route::get('/{any?}', function () {
     return view('welcome');
 })->where('any', '^(?!api\/)[\/\w\.\,-]*');
+
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');

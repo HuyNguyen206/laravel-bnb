@@ -1,6 +1,6 @@
 <template>
-    <div class="invalid-feedback d-block mb-2" v-if="errorFor(listError, field)">
-        <p v-for="(err, index) in errorFor(listError, field)" :key="field+index">
+    <div class="invalid-feedback d-block" v-if="errorFor(listError, field)">
+        <p class="mb-0" v-for="(err, index) in errorFor(listError, field)" :key="field+index">
             {{err}}
         </p>
     </div>

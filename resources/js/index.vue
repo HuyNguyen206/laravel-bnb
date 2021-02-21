@@ -1,11 +1,29 @@
 <template>
     <div>
-        <nav class="navbar navbar-light bg-light p-2 mb-2">
+        <nav class="navbar navbar-light bg-light p-2 mb-2 align-items-start">
             <router-link :to="{name:'home'}">Home</router-link>
-            <router-link :to="{name: 'bookable'}">Bookable</router-link>
-            <router-link :to="{name : 'basket'}" class="btn btn-primary">
-                Basket <span class="badge badge-light">{{itemsInBasket}}</span>
-            </router-link>
+            <ul class="navbar-nav" >
+                <li class="nav-item" v-if="isLogin">
+                    <router-link :to="{name : 'basket'}"  class="nav-link">
+                        Basket <span class="badge badge-light">{{itemsInBasket}}</span>
+                    </router-link>
+                </li>
+                <li class="nav-item" v-if="!isLogin">
+                    <router-link :to="{name : 'home'}" class="nav-link">
+                        Login
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :to="{name : 'home'}" v-if="!isLogin" class="nav-link">
+                        Register
+                    </router-link>
+                </li>
+                <li class="nav-item">
+                    <router-link :to="{name : 'home'}" v-if="isLogin"class="nav-link">
+                        Logout
+                    </router-link>
+                </li>
+            </ul>
         </nav>
         <div class="container">
             <router-view></router-view>
@@ -23,7 +41,8 @@ export default {
             lastSearchComputed: 'lastSearch'
         }),
         ...mapGetters({
-            itemsInBasket: 'itemsInBasket'
+            itemsInBasket: 'itemsInBasket',
+            isLogin: 'isLogin'
         })
     }
 

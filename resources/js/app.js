@@ -10,6 +10,7 @@ require('./bootstrap');
 import VueRouter from 'vue-router';
 import router from "./router";
 import index from './index';
+
 window.Vue = require('vue');
 Vue.use(VueRouter)
 
@@ -25,6 +26,7 @@ Vue.use(VueRouter)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 
+Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -37,6 +39,7 @@ import ErrorShow from "./shared/components/ErrorShow";
 import Success from "./shared/components/Success";
 import Vuex from 'vuex'
 import storeDefinition from "./store";
+
 Vue.use(Vuex)
 Vue.filter('momentAgo', (date) => {
     return moment(date).fromNow()
@@ -47,14 +50,41 @@ Vue.component('error-show', ErrorShow)
 Vue.component('success', Success)
 
 const store = new Vuex.Store(storeDefinition)
+window.axios.interceptors.response.use(
+    (response) => {
+        return response
+    },
+    (error) => {
+        if(error.response.status == 401)
+        {
+            store.dispatch('logout')
+        }
+        return Promise.reject(error)
+    })
 const app = new Vue({
     el: '#app',
     router,
     store,
-    components:{
+    components: {
         index
     },
-    beforeCreate() {
+    async beforeCreate() {
         this.$store.dispatch('loadStoredSearch')
+        this.$store.dispatch('loadUserInfo')
+
+        // await axios.post('/login',
+        //     {
+        //         email: 'rvolkman@example.com',
+        //         password: 'password'
+        //     },
+        // {
+        //     headers: {
+        //         'Accept': 'application/json',
+        //         'Content-type': 'application/json',
+        //     }
+        // }
+        // )
+        // await axios.get('/user')
     }
 });
+

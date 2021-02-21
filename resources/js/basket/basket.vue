@@ -160,7 +160,7 @@ export default {
             this.loading = true
             axios.post('/api/checkout', data)
              .then(res => {
-                 this.$store.commit('setBasket', [])
+                 this.$store.dispatch('setBasket', [])
                  this.errors = []
                  this.alreadyPurchase = true
              })
