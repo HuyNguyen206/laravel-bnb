@@ -17,7 +17,7 @@
             </button>
             <hr>
             <div>
-                Not have account yet? <span><router-link :to="{name: 'home'}">Register</router-link></span>
+                Not have account yet? <span><router-link :to="{name: 'register'}">Register</router-link></span>
             </div>
             <div>
                 Forgot password ? <span><router-link :to="{name: 'home'}">Forgot password</router-link></span>

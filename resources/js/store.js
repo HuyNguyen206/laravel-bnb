@@ -87,9 +87,9 @@ export default {
             localStorage.setItem('basket', JSON.stringify(state.basket.items))
         },
        async loadUserInfo({dispatch, commit}){
-            console.log(isLogin())
             if(isLogin())
             {
+                console.log("test isLogin: " + isLogin())
                 try {
                     let userState = (await axios.get('/user')).data
                     commit('setUser', userState)
